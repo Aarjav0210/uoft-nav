@@ -1,21 +1,24 @@
-api_key = "AIzaSyAjNTixnCRC4OMFDSC2rO166XBRBPl_n_c"
 
 import requests
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 meta_base = 'https://maps.googleapis.com/maps/api/streetview/metadata?'
 pic_base = 'https://maps.googleapis.com/maps/api/streetview?'
 
 location = '27 King\'s College Cir, Toronto, ON M5S'
 
-# define the params for the metadata reques
-meta_params = {'key': api_key,
+# define the params for the metadata request
+meta_params = {'key': os.getenv('API_KEY'),
                'location': location
                }
 # define the params for the picture request
-pic_params = {'key': api_key,
+pic_params = {'key': os.getenv('API_KEY'),
               'location': location,
               'size': '640x640'
               }
@@ -38,7 +41,7 @@ with open(filename, 'wb') as file:
 # remember to close the response connection to the API
 pic_response.close()
 
-plt.figure(figsize=(15, 15))
+plt.figure(figsize=(10, 10))
 img=mpimg.imread(filename)
 imgplot = plt.imshow(img)
 plt.show()
