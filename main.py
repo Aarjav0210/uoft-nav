@@ -38,7 +38,7 @@ with open(filename, 'wb') as file:
 # remember to close the response connection to the API
 pic_response.close()
 
-plt.figure(figsize=(10, 10))
+plt.figure(figsize=(15, 15))
 img=mpimg.imread(filename)
 imgplot = plt.imshow(img)
 plt.show()
