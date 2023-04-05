@@ -11,7 +11,7 @@ load_dotenv()
 meta_base = 'https://maps.googleapis.com/maps/api/streetview/metadata?'
 pic_base = 'https://maps.googleapis.com/maps/api/streetview?'
 
-location = '27 King\'s College Cir, Toronto, ON M5S'
+location = '88 King\'s College Cir, Toronto, ON M5S'
 
 # define the params for the metadata request
 meta_params = {'key': os.getenv('API_KEY'),
