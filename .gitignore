@@ -372,3 +372,4 @@ images/
 .env
 uoft-nav-env/
 uoft-nav-venv/
+cache/

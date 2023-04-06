@@ -1,4 +1,4 @@
-CODE Building Name GRID
+CODE, Building Name, GRID
 AB Astronomy and Astrophysics (E5)
 AD Enrolment Services (A2)
 AH Alumni Hall, Muzzo Family (D5)
