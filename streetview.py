@@ -111,10 +111,10 @@ class StreetViewer(object):
             print(">>> Picture not available in StreetView, ABORTING!")
 
 
-load_dotenv()
-gwu_viewer = StreetViewer(api_key= os.getenv('API_KEY'),
-                           location='43.66408901245062, -79.39844940371975',
-                           fov=120)
-gwu_viewer.get_meta()
-gwu_viewer.get_pic()
-gwu_viewer.display_pic()
+# load_dotenv()
+# # gwu_viewer = StreetViewer(api_key= os.getenv('API_KEY'),
+# #                            location='43.66408901245062, -79.39844940371975',
+# #                            fov=120)
+# # gwu_viewer.get_meta()
+# # gwu_viewer.get_pic()
+# # gwu_viewer.display_pic()
