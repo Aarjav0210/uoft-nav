@@ -373,3 +373,6 @@ images/
 uoft-nav-env/
 uoft-nav-venv/
 cache/
+
+data/cifar-10*
+
