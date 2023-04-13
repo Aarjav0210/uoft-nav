@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 
 class StreetViewer(object):
-    def __init__(self, api_key, location, size="640x640", fov=90, heading=9999, pitch=0,
+    def __init__(self, api_key, location, tag, size="640x640", fov=90, heading=9999, pitch=0,
                  folder_directory='./images/', verbose=True):
         """
         This class handles a single API request to the Google Static Street View API
@@ -35,6 +35,7 @@ class StreetViewer(object):
                                fov=self.fov,
                                heading=self.heading)
         self.verbose = verbose
+        self.tag = tag
     
     def get_meta(self):
         """
@@ -43,7 +44,7 @@ class StreetViewer(object):
         # saving the metadata as json for later usage
         # "/"s are removed to avoid confusion on directory
         self.meta_path = "{}meta_{}.json".format(
-            self.folder_directory, self.location.replace("/", ""))
+            self.folder_directory, self.tag)
         # self.meta_path = "{}meta_{}.json".format(
         #     self.folder_directory, "test")
         self._meta_response = requests.get(
@@ -70,11 +71,11 @@ class StreetViewer(object):
         """
         # define path to save picture and headers
         self.pic_path = "{}pic_{}.jpg".format(
-            self.folder_directory, self.location.replace("/", ""))
+            self.folder_directory, self.tag)
         # self.pic_path = "{}pic_{}.jpg".format(
         #     self.folder_directory, "test")
         self.header_path = "{}header_{}.json".format(
-            self.folder_directory, self.location.replace("/", ""))
+            self.folder_directory, self.tag)
         # self.header_path = "{}header_{}.json".format(
         #     self.folder_directory, "test")
         # only when meta_status is OK will the code run to query picture (cost incurred)

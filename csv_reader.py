@@ -1,11 +1,10 @@
 import os
 import pandas as pd
-from dotenv import load_dotenv
-from streetview import StreetViewer
+from street_viewer import StreetViewer
 
 
 #read csv file
-class CSVReader:
+class CSVReader(object):
     def __init__(self, filename):
         self.filename = filename
         self.filepath = os.path.join(os.getcwd(), filename)
@@ -29,13 +28,13 @@ class CSVReader:
     def print_row(row):
         print(row)
 
-    def get_image(self, tag):
+    def get_image(self, tag, api_key):
         row = self.get_row(tag)
         location = row['LatLong']
         fov = row['FOV']
         heading = row['Heading']
         pitch = row['Pitch']
-        image_viewer = StreetViewer(api_key=os.getenv('API_KEY'), location=location, fov=fov, heading=heading, pitch=pitch, verbose=True)
+        image_viewer = StreetViewer(api_key=api_key, location=location, fov=fov, heading=heading, pitch=pitch, verbose=True, tag=tag)
         image_viewer.get_meta()
         image_viewer.get_pic()
-        image_viewer.display_pic()
+        # image_viewer.display_pic()
