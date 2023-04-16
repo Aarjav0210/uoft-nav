@@ -28,13 +28,18 @@ class CSVReader(object):
     def print_row(row):
         print(row)
 
-    def get_image(self, tag, api_key):
-        row = self.get_row(tag)
-        location = row['LatLong']
-        fov = row['FOV']
-        heading = row['Heading']
-        pitch = row['Pitch']
-        image_viewer = StreetViewer(api_key=api_key, location=location, fov=fov, heading=heading, pitch=pitch, verbose=True, tag=tag)
-        image_viewer.get_meta()
-        image_viewer.get_pic()
+    # def get_image(self, tag, api_key, location=None, fov=None, heading=None, pitch=None):
+    #     row = self.get_row(tag)
+    #     if location == None:
+    #         location = row['LatLong']
+    #     if fov == None:
+    #         fov = row['FOV']
+    #     if heading == None:
+    #         heading = row['Heading']
+    #     if pitch == None:
+    #         pitch = row['Pitch']
+            
+    #     image_viewer = StreetViewer(api_key=api_key, location=location, fov=fov, heading=heading, pitch=pitch, verbose=True, tag=tag)
+    #     image_viewer.get_meta()
+    #     image_viewer.get_pic()
         # image_viewer.display_pic()

@@ -27,6 +27,6 @@ img_files = os.listdir(img_dir)
 img_list = [img for img in img_files if img.endswith(".jpg")]
 img_path = os.path.join(img_dir, img_list[0])
 
-ng = NoiseGenerator()
-ng.show_noise(img_path, 'low')
-ng.show_noise(img_path, 'high')
+# ng = NoiseGenerator()
+# ng.show_noise(img_path, 'low')
+# ng.show_noise(img_path, 'high')
