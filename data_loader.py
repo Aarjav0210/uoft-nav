@@ -68,19 +68,15 @@ class DataLoader(object):
                 img_list.append((img, tag))
         return img_list
     
-    # Building A
-    # A1.png, A2.png, A3, A4, A5
-    # (img, label): (A1.png, A), (A2.png, A), (A3.png, A), (A4.png, A), (A5.png, A)
-    
-    def save_image(self, image_content, tag, verbose=True):
+    def save_image(self, image_content, folder_tag, tag, verbose=True):
         """
         Method to save StreetView image to local directory
         """
+        self.building_dir = os.path.join(self.img_dir, folder_tag)
+        if not os.path.exists(self.building_dir):
+            os.makedirs(self.building_dir)
         if image_content is not None:
-            self.pic_path = "{}pic_{}.jpg".format(
-                self.img_dir, tag)
-            # self.pic_path = "{}pic_{}.jpg".format(
-            #     self.folder_directory, "test")
+            self.pic_path = os.path.join(self.building_dir, f"pic_{tag}.jpg")
             with open(self.pic_path, 'wb') as file:
                 file.write(image_content)
             if verbose:
@@ -88,9 +84,13 @@ class DataLoader(object):
         else:
             print(">>> No image content available, cannot save image!")
 
+    
+    # Building A
+    # A1.png, A2.png, A3, A4, A5
+    # (img, label): (A1.png, A), (A2.png, A), (A3.png, A), (A4.png, A), (A5.png, A)
     def save_image_batch(self, img_list, verbose=True):
         for i, img in enumerate(img_list):
-            self.save_image(img[0], img[1] + "-" + str(i), verbose)
+            self.save_image(img[0], img[1], img[1] + "-" + str(i), verbose)
     
     #load all images from the csv
     def load_classes(self):
@@ -100,11 +100,6 @@ class DataLoader(object):
             classes.append(img_list)
         
         return classes
-    
-    # lst = [("A", "A1"), ("B", "B1"), ("C", "C1"), ("D", "D1"), ("E", "E1")]
-    # lst2 = [("A", "A1"), ("B", "B1"), ("C", "C1")]
-    #remove lst2 from lst
-    # lst = [x for x in lst if x not in lst2]
 
     # n batch should have p random, but distinct images from each class
     # Each batch should have no duplicates
@@ -126,8 +121,8 @@ class DataLoader(object):
     
 
 # # Run the following code to test the data_loader.py file:
-# load_dotenv()
-# dl = DataLoader('uoft_locations.csv')
+load_dotenv()
+dl = DataLoader('uoft_locations.csv')
 
 # Run to print 4 batches with 2 images from each class (number of buildings)
 # batches = dl.load_batches(4, 2)
@@ -136,5 +131,7 @@ class DataLoader(object):
 #     print([tag for img, tag in batch])
 
 # Run save image batch to save 9 images from a single building
-# img_list = dl.get_image_batch('CL_3054', os.getenv('API_KEY'), noise=True)
-# dl.save_image_batch(img_list)
+building_tags = dl.tags[0:5]
+for tag in building_tags:
+    img_list = dl.get_image_batch(tag, os.getenv('API_KEY'))
+    dl.save_image_batch(img_list)
