@@ -1,44 +1,32 @@
-api_key = "AIzaSyAjNTixnCRC4OMFDSC2rO166XBRBPl_n_c"
 
 import requests
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+#Get access to functions from streetview.py
+from street_viewer import StreetViewer
+#for csv file
+import pandas as pd
+import os
+from dotenv import load_dotenv
+from csv_reader import CSVReader
+from noise_generator import NoiseGenerator
 
+#load API key
+load_dotenv()
 
-meta_base = 'https://maps.googleapis.com/maps/api/streetview/metadata?'
-pic_base = 'https://maps.googleapis.com/maps/api/streetview?'
+#load data from csv file
+filename = 'uoft_locations.csv'
+uoft_data = CSVReader(filename)
 
-location = '27 King\'s College Cir, Toronto, ON M5S'
+#Get image -- uses API calls, so only run when necessary
+# uoft_tags = uoft_data.get_all_tags()
+# uoft_data.get_image(uoft_tags[25], os.getenv('API_KEY'))
 
-# define the params for the metadata reques
-meta_params = {'key': api_key,
-               'location': location
-               }
-# define the params for the picture request
-pic_params = {'key': api_key,
-              'location': location,
-              'size': '640x640'
-              }
+img_dir = os.path.join(os.getcwd(), 'images')
+img_files = os.listdir(img_dir)
+img_list = [img for img in img_files if img.endswith(".jpg")]
+img_path = os.path.join(img_dir, img_list[0])
 
-# obtain the metadata of the request (this is free)
-meta_response = requests.get(meta_base, params=meta_params)
-print(meta_response.json())
-
-pic_response = requests.get(pic_base, params=pic_params)
-
-for key, value in pic_response.headers.items():
-    print(f"{key}: {value}")
-
-print(pic_response.ok)
-
-filename = './images/test.jpg' 
-
-with open(filename, 'wb') as file:
-    file.write(pic_response.content)
-# remember to close the response connection to the API
-pic_response.close()
-
-plt.figure(figsize=(10, 10))
-img=mpimg.imread(filename)
-imgplot = plt.imshow(img)
-plt.show()
+# ng = NoiseGenerator()
+# ng.show_noise(img_path, 'low')
+# ng.show_noise(img_path, 'high')

@@ -368,3 +368,11 @@ pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/virtualenv
 images/
+
+.env
+uoft-nav-env/
+uoft-nav-venv/
+cache/
+
+data/cifar-10*
+
