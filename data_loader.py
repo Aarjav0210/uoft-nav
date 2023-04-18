@@ -46,7 +46,7 @@ class DataLoader(object):
         return (sv.get_pic(), tag)
 
     def get_image_batch(self, tag, api_key, noise=False):
-        tag_counter = 1
+        # tag_counter = 1
         location, fov, heading, pitch = self.get_params(tag)
         # self.get_image(tag, api_key, image_tag=tag)
         # This is for the actual number of images (81)
@@ -65,9 +65,12 @@ class DataLoader(object):
                             img = self.ng.generate_noise(img, 'low')
                         else:
                             img = self.ng.generate_noise(img, 'high')
-                img_list.append((img, tag + "-" +str(tag_counter)))
-                tag_counter += 1
+                img_list.append((img, tag))
         return img_list
+    
+    # Building A
+    # A1.png, A2.png, A3, A4, A5
+    # (img, label): (A1.png, A), (A2.png, A), (A3.png, A), (A4.png, A), (A5.png, A)
     
     def save_image(self, image_content, tag, verbose=True):
         """
@@ -84,20 +87,54 @@ class DataLoader(object):
                 print(f">>> Image saved to {self.pic_path}")
         else:
             print(">>> No image content available, cannot save image!")
-    
-    def save_image_batch(self, img_list, verbose=True):
-        for img in img_list:
-            self.save_image(img[0], img[1], verbose)
 
+    def save_image_batch(self, img_list, verbose=True):
+        for i, img in enumerate(img_list):
+            self.save_image(img[0], img[1] + "-" + str(i), verbose)
     
+    #load all images from the csv
+    def load_classes(self):
+        classes = []
+        for tag in self.tags[0:6]:
+            img_list = self.get_image_batch(tag, os.getenv('API_KEY'))
+            classes.append(img_list)
+        
+        return classes
+    
+    # lst = [("A", "A1"), ("B", "B1"), ("C", "C1"), ("D", "D1"), ("E", "E1")]
+    # lst2 = [("A", "A1"), ("B", "B1"), ("C", "C1")]
+    #remove lst2 from lst
+    # lst = [x for x in lst if x not in lst2]
+
+    # n batch should have p random, but distinct images from each class
+    # Each batch should have no duplicates
+    def load_batches(self, n, p):
+        classes = self.load_classes()
+        batches = []
+        for i in range(n):
+            batch = []
+            for c in classes:
+                #select p random images from c, but no duplicates
+                #once appended to the list, remove from c
+                # random.sample will help
+                selection = random.sample(c, p)
+                batch.extend(selection)
+                [img_tag_pair for img_tag_pair in c if img_tag_pair not in selection]
+            batches.append(batch)
+        return batches
     
     
 
 # # Run the following code to test the data_loader.py file:
-load_dotenv()
-dl = DataLoader('uoft_locations.csv')
-img_list = dl.get_image_batch('BA_3348', os.getenv('API_KEY'), noise=True)
-dl.save_image_batch(img_list)
+# load_dotenv()
+# dl = DataLoader('uoft_locations.csv')
 
-# for img in dl.get_image_batch('JO_2678', os.getenv('API_KEY')):
-#     dl.save_image(img[0], img[1])
+# Run to print 4 batches with 2 images from each class (number of buildings)
+# batches = dl.load_batches(4, 2)
+# for i, batch in enumerate(batches):
+#     print(f"Batch {i}:")
+#     print([tag for img, tag in batch])
+
+# Run save image batch to save 9 images from a single building
+# img_list = dl.get_image_batch('CL_3054', os.getenv('API_KEY'), noise=True)
+# dl.save_image_batch(img_list)
