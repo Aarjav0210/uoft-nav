@@ -60,7 +60,7 @@ class ResNet2(object):
         }
 
         dataloaders = {
-            x: DataLoader(image_datasets[x], batch_size=BATCH_SIZE, shuffle=True, num_workers=4)
+            x: DataLoader(image_datasets[x], batch_size=BATCH_SIZE, shuffle=True, num_workers=0)
             for x in ["train", "val", "test"]
         }
 
