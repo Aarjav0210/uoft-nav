@@ -151,8 +151,8 @@ class StreetViewer(object):
 
 # load_dotenv()
 # gwu_viewer = StreetViewer(api_key= os.getenv('API_KEY'),
-                           location='43.66408901245062, -79.39844940371975', tag='test',
-                           fov=120)
+                        #    location='43.66408901245062, -79.39844940371975', tag='test',
+                        #    fov=120)
 # gwu_viewer.get_meta()
 # img = gwu_viewer.get_pic()
 # gwu_viewer.save_image()
