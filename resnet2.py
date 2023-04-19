@@ -10,8 +10,8 @@ import numpy as np
 
 import splitfolders
 
-class ResNet2(object):
-  def __init__(self, SEED=42):
+class ResNet2(Object, SEED=42):
+  def __init__(self):
     self.seed = SEED
   
   def run(self):
