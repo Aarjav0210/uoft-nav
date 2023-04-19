@@ -27,7 +27,7 @@ class ResNet2(object):
         DATA_DIR_PATH = "images"
         OUTPUT_DIR = "split_images"
 
-        splitfolders.ratio(DATA_DIR_PATH, OUTPUT_DIR, seed=self.seed, ratio=(TRAIN_R, VAL_R, TEST_R))
+        #splitfolders.ratio(DATA_DIR_PATH, OUTPUT_DIR, seed=self.seed, ratio=(TRAIN_R, VAL_R, TEST_R))
 
         train_data_dir = f"{OUTPUT_DIR}/train"
         valid_data_dir = f"{OUTPUT_DIR}/val"
