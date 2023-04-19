@@ -58,8 +58,6 @@ class DataLoader(object):
         #     for j in range (-1, 2):
                 # if i == 0 and j == 0:
                 #     continue
-                # 
-                fov = int(fov)
                 img = self.get_image(tag, api_key, fov=fov + ((i*j)/max(1,min(abs(i), abs(j)))), heading=heading + i, pitch=pitch + j)[0] #image_tag=tag + "-" +str(tag_counter), fov=fov + max(i, j), heading=heading + i, pitch=pitch + j)
                 if noise:
                     if random.randint(0, 1) == 1:
