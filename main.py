@@ -14,11 +14,11 @@ from data_loader import DataLoader
 from resnet2 import ResNet2
 
 
-from tensorflow.keras.layers import Conv2D, Flatten, Dense, MaxPool2D, BatchNormalization, GlobalAveragePooling2D
-from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img
-from tensorflow.keras.models import Sequential, Model
+# from tensorflow.keras.layers import Conv2D, Flatten, Dense, MaxPool2D, BatchNormalization, GlobalAveragePooling2D
+# from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
+# from tensorflow.keras.preprocessing import image
+# from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img
+# from tensorflow.keras.models import Sequential, Model
 
 import numpy as np
 
@@ -48,7 +48,7 @@ import splitfolders
 load_dotenv()
 dl = DataLoader('uoft_locations.csv')
 building_tags = dl.tags
-for tag in building_tags:
+for tag in building_tags[75:]:
     img_list = dl.get_image_batch(tag, os.getenv('API_KEY'), noise=True)
     dl.save_image_batch(img_list)
 
