@@ -1,10 +1,12 @@
 import numpy as np
 import torch
 import torch.nn as nn
+import torchvision
 from torchvision import datasets
 from torchvision import transforms
 from torch.utils.data.sampler import SubsetRandomSampler
 import ssl
+from dataset import myDataset
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -35,10 +37,13 @@ def data_loader(data_dir,
     ])
 
     if test:
-        dataset = datasets.CIFAR10(
-          root=data_dir, train=False,
-          download=True, transform=transform,
-        )
+        # dataset = datasets.CIFAR10(
+        #   root=data_dir, train=False,
+        #   download=True, transform=transform,
+        dataset = myDataset(
+            csv_file='dataset.csv',
+            root_dir='train',
+            transform=transform)
 
         data_loader = torch.utils.data.DataLoader(
             dataset, batch_size=batch_size, shuffle=shuffle
@@ -47,15 +52,17 @@ def data_loader(data_dir,
         return data_loader
 
     # load the dataset
-    train_dataset = datasets.CIFAR10(
-        root=data_dir, train=True,
-        download=True, transform=transform,
-    )
+    dataset = myDataset(csv_file='dataset.csv', root_dir='images', transform=transform)
+    train_dataset, valid_dataset = torch.utils.data.random_split(dataset, [int(len(dataset)*0.8), (len(dataset) - int(len(dataset)*0.8))])
+    # train_dataset = datasets.CIFAR10(
+    #     root=data_dir, train=True,
+    #     download=True, transform=transform,
+    # )
 
-    valid_dataset = datasets.CIFAR10(
-        root=data_dir, train=True,
-        download=True, transform=transform,
-    )
+    # valid_dataset = datasets.CIFAR10(
+    #     root=data_dir, train=True,
+    #     download=True, transform=transform,
+    # )
 
     num_train = len(train_dataset)
     indices = list(range(num_train))
@@ -78,7 +85,14 @@ def data_loader(data_dir,
     return (train_loader, valid_loader)
 
 
-# CIFAR10 dataset 
+# dataset = myDataset(csv_file='dataset.csv', root_dir='train', transform=transform)
+# train_set, valid_set, test_set = torch.utils.data.random_split(dataset, [int(len(dataset)*0.8), (len(dataset) - int(len(dataset)*0.8) * 0.5), (len(dataset) - int(len(dataset)*0.8) * 0.5)])
+# my dataset dataset 
+
+# train_loader = torch.utils.data.DataLoader(dataset=train_set, batch_size=batch_size, shuffle=True, num_workers=2)
+# valid_loader = torch.utils.data.DataLoader(dataset=valid_set, batch_size=batch_size, shuffle=True, num_workers=2)
+# test_loader = torch.utils.data.DataLoader(dataset=test_set, batch_size=batch_size, shuffle=True, num_workers=2)
+
 train_loader, valid_loader = data_loader(data_dir='./data',
                                          batch_size=64)
 
@@ -160,12 +174,12 @@ class ResNet(nn.Module):
         return x
     
 # hyperparams    
-num_classes = 10
+num_classes = 129
 num_epochs = 20
 batch_size = 16
 learning_rate = 0.01
 
-model = ResNet(ResidualBlock, [3, 4, 6, 3]).to(device)
+model = ResNet(ResidualBlock, [3, 4, 6, 3], num_classes=num_classes).to(device)
 
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()

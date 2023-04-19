@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 from csv_reader import CSVReader
 from noise_generator import NoiseGenerator
 from data_loader import DataLoader
-from resnet2 import ResNet2
 
 
 # from tensorflow.keras.layers import Conv2D, Flatten, Dense, MaxPool2D, BatchNormalization, GlobalAveragePooling2D
@@ -48,7 +47,7 @@ import splitfolders
 load_dotenv()
 dl = DataLoader('uoft_locations.csv')
 building_tags = dl.tags
-for tag in building_tags[0:5]:
+for tag in building_tags[0:1]:
     img_list = dl.get_image_batch(tag, os.getenv('API_KEY'), noise=True)
     dl.save_image_batch(img_list)
 

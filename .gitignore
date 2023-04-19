@@ -368,8 +368,11 @@ pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/virtualenv
 images/
+images_1/
+images_1 copy
 split_images/
 images_big/
+
 
 
 .env
@@ -379,3 +382,4 @@ cache/
 
 data/cifar-10*
 
+*.pth
