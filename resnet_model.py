@@ -8,6 +8,7 @@ import ssl
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 #loading cifar dataset 
 # todo: update this to use our images instead of cifar (match the format of this dataset)
 ##############################################################################################

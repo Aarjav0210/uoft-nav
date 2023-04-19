@@ -368,6 +368,8 @@ pip-selfcheck.json
 
 # End of https://www.toptal.com/developers/gitignore/api/virtualenv
 images/
+split_images/
+
 
 .env
 uoft-nav-env/
