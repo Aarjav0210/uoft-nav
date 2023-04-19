@@ -88,11 +88,11 @@ McLuhan Program,MC_2333,N/A,,,,idk
 Macdonald-Mowat House,MA_1364,"43.66165354651637, -79.39716789974777",35,15,120,
 Morrison Hall,MO_5908,"43.66293867182139, -79.39799202308856",50,15,80,
 McLennan Physical Labs,MC_7625,"43.66073846820043, -79.39811932470569",250,10,100,
-McMurrich Building,MC_5375,"43.66137707912101, -79.39408543100987",,,,"No front view of the building, kinda useless"
+McMurrich Building,MC_5375,N/A,,,,"No front view of the building, kinda useless"
 Medical Sciences Building,ME_8426,"43.66138772329553, -79.39402905419084",140,10,80,
 Munk School of Global Affairs at Trinity,MU_1068,N/A,,,,same as munk school of global affairs
 North Borden Building,NO_6035,"43.66020603824681, -79.40034951051688",30,20,110,
-New College,NE_3536,"43.66254700175098, -79.39972242567258",N/A,N/A,N/A,What's the difference between this and NC III
+New College,NE_3536,N/A,,,,What's the difference between this and NC III
 Northrop Frye Hall,NO_5305,"43.66612518958625, -79.39257602767255",30,10,70,
 C. David Naylor Building,CX_9075,"43.66075677043718, -79.39155047556356",210,10,65,
 New College III,NE_1746,"43.66207896528736, -79.39947066756099",260,10,90,
@@ -100,7 +100,7 @@ New College III,NE_1746,"43.66207896528736, -79.39947066756099",260,10,90,
 Odette Hall,OD_2380,"43.66616552105702, -79.38872874806759",350,10,80,
 Ontario Institute for Studies in Education (OISE),ON_5652,"43.66775944267418, -79.39849219580475",0,20,110,
 Leslie L. Dan Pharmacy Bldg.,LE_2709,"43.65953195665854, -79.39169954681128",350,30,110,
-45 St. George St.,45_6131,"43.66263871393415, -79.39813507951314",,,,Fully covered by trees...
+45 St. George St.,45_6131,N/A,,,,Fully covered by trees...
 Pontifical Institute,PO_9305,"43.66542461554466, -79.39141330462047",40,5,50,
 E.J. Pratt Library,EX_1360,N/A,,,,Away from street view
 D.L. Pratt Building,DX_4769,"43.659859317289644, -79.39438336204998",230,15,90,
