@@ -21,7 +21,7 @@ class VGG16(object):
         TEST_R = 0.2
 
         IMG_HEIGHT, IMG_WIDTH = (224, 224)
-        BATCH_SIZE = 32
+        BATCH_SIZE = 16
 
         DATA_DIR_PATH = "images"
         OUTPUT_DIR = "split_images"
@@ -67,7 +67,7 @@ class VGG16(object):
 
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-        base_model = models.vgg16(pretrained=False)
+        base_model = models.vgg16(pretrained=True)
         num_ftrs = base_model.classifier[0].in_features
 
         base_model = nn.Sequential(*(list(base_model.children())[:-1]))
