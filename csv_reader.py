@@ -8,14 +8,17 @@ class CSVReader(object):
     def __init__(self, filename):
         self.filename = filename
         self.filepath = os.path.join(os.getcwd(), filename)
-        self.df = pd.read_csv(self.filepath)
+        df = pd.read_csv(self.filepath)
+        self.df = df.dropna(subset=['LatLong'])
+
 
     #return list of all tags from the 'tag' column
     def get_all_tags(self):
         #dont add any tags that have a 'N/A' in for LatLong
-        df = self.df
-        df = df[df['LatLong'] != 'N/A']
-        tags = df['Tag'].tolist()
+        # df = self.df
+        # #remove files that have 'N/A' for LatLong
+        # df = df[df['LatLong'] != 'nan']
+        tags = self.df['Tag'].tolist()
         return tags
 
     def get_row(self, tag):
@@ -43,3 +46,9 @@ class CSVReader(object):
     #     image_viewer.get_meta()
     #     image_viewer.get_pic()
         # image_viewer.display_pic()
+
+# csv = CSVReader('uoft_locations.csv')
+# print(len(csv.get_all_tags()))
+# # get all rows and print all latlongs
+# for tag in csv.get_all_tags():
+#     print(csv.get_row(tag)['LatLong'])
