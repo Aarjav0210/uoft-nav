@@ -21,7 +21,7 @@ class VGG16(object):
         TEST_R = 0.2
 
         IMG_HEIGHT, IMG_WIDTH = (224, 224)
-        BATCH_SIZE = 16
+        BATCH_SIZE = 32
 
         DATA_DIR_PATH = "images"
         OUTPUT_DIR = "split_images"
