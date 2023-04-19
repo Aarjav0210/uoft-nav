@@ -5,7 +5,6 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
-import splitfolders
 import matplotlib.pyplot as plt
 import torch.multiprocessing as mp
 
@@ -26,7 +25,7 @@ def load_saved_model(model_path, num_classes):
     model = nn.Sequential(base_model, nn.Flatten(), classifier)
 
     # Load the saved model state_dict
-    model.load_state_dict(torch.load(model_path))
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 
     return model
 
