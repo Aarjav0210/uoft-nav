@@ -50,15 +50,17 @@ class DataLoader(object):
         location, fov, heading, pitch = self.get_params(tag)
         # self.get_image(tag, api_key, image_tag=tag)
         # This is for the actual number of images (81)
-        # for i in range (-4, 5):
-        #     for j in range (-4, 5):
-        # Right now we are using this for testing purposes (9)
         img_list = []
-        for i in range (-1, 2):
-            for j in range (-1, 2):
+        for i in range (-2, 4, 2): ##horizontal axis for heading -8 -6 -4 -2 0 2 4 6 8 (10)
+            for j in range (-2, 4, 2): ##vertical axis for pitch 
+        # Right now we are using this for testing purposes (9)
+        # for i in range (-1, 2):
+        #     for j in range (-1, 2):
                 # if i == 0 and j == 0:
                 #     continue
-                img = self.get_image(tag, api_key, fov=fov + max(i, j), heading=heading + i, pitch=pitch + j)[0] #image_tag=tag + "-" +str(tag_counter), fov=fov + max(i, j), heading=heading + i, pitch=pitch + j)
+                # 
+                fov = int(fov)
+                img = self.get_image(tag, api_key, fov=fov + ((i*j)/max(1,min(abs(i), abs(j)))), heading=heading + i, pitch=pitch + j)[0] #image_tag=tag + "-" +str(tag_counter), fov=fov + max(i, j), heading=heading + i, pitch=pitch + j)
                 if noise:
                     if random.randint(0, 1) == 1:
                         if random.randint(0, 1) == 1:
@@ -131,7 +133,7 @@ dl = DataLoader('uoft_locations.csv')
 #     print([tag for img, tag in batch])
 
 # Run save image batch to save 9 images from a single building
-building_tags = dl.tags[0:5]
+building_tags = dl.tags[0:3]
 for tag in building_tags:
-    img_list = dl.get_image_batch(tag, os.getenv('API_KEY'))
+    img_list = dl.get_image_batch(tag, os.getenv('API_KEY'), noise=True)
     dl.save_image_batch(img_list)
