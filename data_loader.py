@@ -50,12 +50,13 @@ class DataLoader(object):
         location, fov, heading, pitch = self.get_params(tag)
         # self.get_image(tag, api_key, image_tag=tag)
         # This is for the actual number of images (81)
-        # for i in range (-4, 5):
-        #     for j in range (-4, 5):
-        # Right now we are using this for testing purposes (9)
         img_list = []
-        for i in range (-1, 2):
-            for j in range (-1, 2):
+        for i in range (-4, 5):
+            for j in range (-4, 5):
+        # Right now we are using this for testing purposes (9)
+        
+        # for i in range (-1, 2):
+        #     for j in range (-1, 2):
                 # if i == 0 and j == 0:
                 #     continue
                 img = self.get_image(tag, api_key, fov=fov + max(i, j), heading=heading + i, pitch=pitch + j)[0] #image_tag=tag + "-" +str(tag_counter), fov=fov + max(i, j), heading=heading + i, pitch=pitch + j)
