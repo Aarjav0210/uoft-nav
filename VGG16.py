@@ -5,7 +5,6 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms, models
-import splitfolders
 import matplotlib.pyplot as plt
 import torch.multiprocessing as mp
 
@@ -69,7 +68,7 @@ class VGG16(object):
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
         base_model = models.vgg16(pretrained=False)
-        num_ftrs = base_model.fc.in_features
+        num_ftrs = base_model.classifier[0].in_features
 
         base_model = nn.Sequential(*(list(base_model.children())[:-1]))
         base_model.to(device)
