@@ -64,7 +64,7 @@ class ResNet2(object):
             for x in ["train", "val", "test"]
         }
 
-        EPOCHS = 100
+        EPOCHS = 50
 
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
