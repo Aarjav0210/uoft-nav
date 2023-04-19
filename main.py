@@ -45,12 +45,12 @@ import splitfolders
 # # ng.show_noise(img_path, 'low')
 # # ng.show_noise(img_path, 'high')
 
-# load_dotenv()
-# dl = DataLoader('uoft_locations.csv')
-# building_tags = dl.tags
-# for tag in building_tags:
-#     img_list = dl.get_image_batch(tag, os.getenv('API_KEY'))
-#     dl.save_image_batch(img_list)
+load_dotenv()
+dl = DataLoader('uoft_locations.csv')
+building_tags = dl.tags
+for tag in building_tags:
+    img_list = dl.get_image_batch(tag, os.getenv('API_KEY'), noise=True)
+    dl.save_image_batch(img_list)
 
 net = ResNet2()
 net.run()

@@ -51,8 +51,8 @@ class DataLoader(object):
         # self.get_image(tag, api_key, image_tag=tag)
         # This is for the actual number of images (81)
         img_list = []
-        for i in range (-2, 4, 2): ##horizontal axis for heading -8 -6 -4 -2 0 2 4 6 8 (10)
-            for j in range (-2, 4, 2): ##vertical axis for pitch 
+        for i in range (-8, 10, 2): ##horizontal axis for heading -8 -6 -4 -2 0 2 4 6 8 (10)
+            for j in range (-8, 10, 2): ##vertical axis for pitch 
         # Right now we are using this for testing purposes (9)
         # for i in range (-1, 2):
         #     for j in range (-1, 2):
@@ -122,9 +122,9 @@ class DataLoader(object):
     
     
 
-# # Run the following code to test the data_loader.py file:
-load_dotenv()
-dl = DataLoader('uoft_locations.csv')
+# # # Run the following code to test the data_loader.py file:
+# load_dotenv()
+# dl = DataLoader('uoft_locations.csv')
 
 # Run to print 4 batches with 2 images from each class (number of buildings)
 # batches = dl.load_batches(4, 2)
@@ -132,8 +132,8 @@ dl = DataLoader('uoft_locations.csv')
 #     print(f"Batch {i}:")
 #     print([tag for img, tag in batch])
 
-# Run save image batch to save 9 images from a single building
-building_tags = dl.tags[0:3]
-for tag in building_tags:
-    img_list = dl.get_image_batch(tag, os.getenv('API_KEY'), noise=True)
-    dl.save_image_batch(img_list)
+# # Run save image batch to save 9 images from a single building
+# building_tags = dl.tags
+# for tag in building_tags:
+#     img_list = dl.get_image_batch(tag, os.getenv('API_KEY'), noise=True)
+#     dl.save_image_batch(img_list)
