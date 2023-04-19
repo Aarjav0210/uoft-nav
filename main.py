@@ -48,9 +48,9 @@ import splitfolders
 load_dotenv()
 dl = DataLoader('uoft_locations.csv')
 building_tags = dl.tags
-for tag in building_tags[75:]:
+for tag in building_tags[0:5]:
     img_list = dl.get_image_batch(tag, os.getenv('API_KEY'), noise=True)
     dl.save_image_batch(img_list)
 
-net = ResNet2()
-net.run()
+# net = ResNet2()
+# net.run()
