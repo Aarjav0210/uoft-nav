@@ -22,7 +22,7 @@ def load_saved_model(model_path, num_classes):
         nn.Softmax(dim=1)
     )
 
-    model = nn.Sequential(base_model, nn.Flatten(), classifier)
+    model = nn.Sequential(*(list(base_model.children())[:-1]))
 
     # Load the saved model state_dict
     model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
