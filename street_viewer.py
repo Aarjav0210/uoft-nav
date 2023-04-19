@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 
 class StreetViewer(object):
-    def __init__(self, api_key, location, tag, size="640x640", fov=90, heading=9999, pitch=0,
+    def __init__(self, api_key, location, tag, size="224x224", fov=90, heading=9999, pitch=0,
                  folder_directory='./images/', verbose=True):
         """
         This class handles a single API request to the Google Static Street View API

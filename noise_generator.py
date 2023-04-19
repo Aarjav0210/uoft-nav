@@ -5,7 +5,7 @@ import numpy as np
 # create a noise generator class
 class NoiseGenerator(object):
     def __init__(self):
-        self.img_shape = (640, 640, 3)
+        self.img_shape = (224, 224, 3)
         self.noise_low = np.random.normal(0, 25, self.img_shape)
         self.noise_high = np.random.normal(0, 50, self.img_shape)
     
