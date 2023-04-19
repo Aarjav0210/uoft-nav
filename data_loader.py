@@ -131,7 +131,7 @@ dl = DataLoader('uoft_locations.csv')
 #     print([tag for img, tag in batch])
 
 # Run save image batch to save 9 images from a single building
-building_tags = dl.tags[0:5]
+building_tags = dl.tags
 for tag in building_tags:
     img_list = dl.get_image_batch(tag, os.getenv('API_KEY'))
     dl.save_image_batch(img_list)
