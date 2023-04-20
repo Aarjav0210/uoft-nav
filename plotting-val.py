@@ -2,13 +2,13 @@ import re
 import matplotlib.pyplot as plt
 
 # Read data from the txt file
-with open('resnet18results.txt', 'r') as f:
+with open('loss-data/resnet18results.txt', 'r') as f:
     content_18 = f.read()
 
-with open('resnet34 loss.txt', 'r') as f:
+with open('loss-data/resnet34 loss.txt', 'r') as f:
     content_34 = f.read()
 
-with open('VGG16 loss.txt', 'r') as f:
+with open('loss-data/VGG16 loss.txt', 'r') as f:
     content_16 = f.read()
 
 # Extract train and validation loss values
