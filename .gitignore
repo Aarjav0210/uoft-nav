@@ -372,7 +372,9 @@ images_1/
 images_1 copy
 split_images/
 images_big/
-
+saved_model/
+loss-data/
+data/
 
 
 .env

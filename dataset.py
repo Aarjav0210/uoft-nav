@@ -2,7 +2,6 @@ import os
 import pandas as pd
 import torch
 from torch.utils.data import Dataset
-from torchvision.transforms.functional import to_tensor
 from skimage import io
 
 class myDataset(Dataset):
@@ -12,7 +11,7 @@ class myDataset(Dataset):
         self.transform = transform
     
     def __len__(self):
-        return len(self.annotations) #10449
+        return len(self.annotations)
 
     def __getitem__(self, index):
         img_path = os.path.join(self.root_dir, self.annotations.iloc[index, 0])
@@ -20,7 +19,5 @@ class myDataset(Dataset):
         y_label = torch.tensor(int(self.annotations.iloc[index, 1]))
         if self.transform:
             image = self.transform(image)
-        
-        # image = to_tensor(image)
 
         return (image, y_label)
