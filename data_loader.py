@@ -11,6 +11,10 @@ from csv_reader import CSVReader
 from noise_generator import NoiseGenerator
 #rand
 import random
+import PIL
+print('Pillow Version:', PIL.__version__)
+from numpy import asarray
+
 
 class DataLoader(object):
     def __init__(self, filename):
@@ -54,8 +58,8 @@ class DataLoader(object):
         for i in range (-8, 10, 2): ##horizontal axis for heading -8 -6 -4 -2 0 2 4 6 8 (10)
             for j in range (-8, 10, 2): ##vertical axis for pitch 
         # Right now we are using this for testing purposes (9)
-        # for i in range (-1, 2):
-        #     for j in range (-1, 2):
+        # for i in range (-3, 6, 3):
+        #     for j in range (-3, 6, 3):
                 # if i == 0 and j == 0:
                 #     continue
                 img = self.get_image(tag, api_key, fov=fov + ((i*j)/max(1,min(abs(i), abs(j)))), heading=heading + i, pitch=pitch + j)[0] #image_tag=tag + "-" +str(tag_counter), fov=fov + max(i, j), heading=heading + i, pitch=pitch + j)
@@ -83,19 +87,42 @@ class DataLoader(object):
                 print(f">>> Image saved to {self.pic_path}")
         else:
             print(">>> No image content available, cannot save image!")
+    
+    def save_image1(self, image_content, target, tag, verbose=True):
+        """
+        Method to save StreetView image to local directory
+        """
+        if image_content is not None:
+            self.pic_path = os.path.join(self.img_dir, f"{tag}.jpg")
+            with open(self.pic_path, 'wb') as file:
+                file.write(image_content)
+            if verbose:
+                print(f">>> Image saved to {self.pic_path}")
+        else:
+            print(">>> No image content available, cannot save image!")
 
     
     # Building A
     # A1.png, A2.png, A3, A4, A5
     # (img, label): (A1.png, A), (A2.png, A), (A3.png, A), (A4.png, A), (A5.png, A)
-    def save_image_batch(self, img_list, verbose=True):
+    # def save_image_batch(self, img_list, verbose=True):
+    #     for i, img in enumerate(img_list):
+    #         self.save_image(img[0], img[1], img[1] + "-" + str(i), verbose)
+    
+    def save_image_batch1(self, img_list, verbose=True):
         for i, img in enumerate(img_list):
-            self.save_image(img[0], img[1], img[1] + "-" + str(i), verbose)
+            self.save_image1(img[0], img[1], img[1] + "-" + str(i), verbose)
+
+    def save_all_images(self):
+        for tag in self.tags[94:]:
+            img_list = self.get_image_batch(tag, os.getenv('API_KEY'), noise=True)
+            self.save_image_batch1(img_list)
+
     
     #load all images from the csv
     def load_classes(self):
         classes = []
-        for tag in self.tags[0:6]:
+        for tag in self.tags:
             img_list = self.get_image_batch(tag, os.getenv('API_KEY'))
             classes.append(img_list)
         
@@ -121,8 +148,8 @@ class DataLoader(object):
     
 
 # # # Run the following code to test the data_loader.py file:
-# load_dotenv()
-# dl = DataLoader('uoft_locations.csv')
+load_dotenv()
+dl = DataLoader('uoft_locations.csv')
 
 # Run to print 4 batches with 2 images from each class (number of buildings)
 # batches = dl.load_batches(4, 2)
@@ -135,3 +162,6 @@ class DataLoader(object):
 # for tag in building_tags:
 #     img_list = dl.get_image_batch(tag, os.getenv('API_KEY'), noise=True)
 #     dl.save_image_batch(img_list)
+
+# print(dl.tags[94:])
+dl.save_all_images()
